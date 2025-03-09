@@ -51,8 +51,8 @@
 			<input type="number" id="productStock" min="0">
 			
 			<label>อัปโหลดรูปสินค้า:</label>
-			<input type="file" id="productImageInput" accept="image/*">
-			<img id="productImagePreview" src="" style="display:none; width: 100px; height: 100px; margin-top: 10px;">
+			<input type="file" id="productImageInput" accept="image/*" onchange="previewImage(event)">
+			<img id="productImagePreview" src="" style="display:none; width: 100px; height: 100px; margin-top: 10px; object-fit: cover; border: 1px solid #ccc;">
 			
 			<button onclick="saveProduct()">💾 บันทึกสินค้า</button>
 		</div>
@@ -98,15 +98,26 @@
 	function goBack() {
 		window.location.href = '../index.html';  // หรือใช้ history.back(); ถ้าอยากให้ย้อนหน้าก่อนหน้า
 	}
+
 	function showProductDetail(barcode) {
-		$('#productCode').text(barcode);
+		document.getElementById('productCode').value = barcode;
 		$('#productModal').fadeIn();
 	}
 
 	function closeModal() {
 		$('#productModal').fadeOut();
 	}
-	
 
+	function previewImage(event) {
+		const input = event.target;
+		if (input.files && input.files[0]) {
+			const reader = new FileReader();
+			reader.onload = function (e) {
+				document.getElementById('productImagePreview').src = e.target.result;
+				document.getElementById('productImagePreview').style.display = 'block';
+			};
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 </script>
 </html>
