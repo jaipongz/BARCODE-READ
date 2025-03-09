@@ -79,13 +79,22 @@ var barcode = function() {
 	
 		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
 			// navigator.mediaDevices.getUserMedia({ video: true })
-			navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" }} })
-				.then(function(stream) {
-					elements.video.srcObject = stream;
-				})
-				.catch(function(error) {
-					console.error('Error accessing webcam:', error);
-				});
+			// navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: "environment" }} })
+			// 	.then(function(stream) {
+			// 		elements.video.srcObject = stream;
+			// 	})
+			// 	.catch(function(error) {
+			// 		console.error('Error accessing webcam:', error);
+			// 	});
+			navigator.mediaDevices.getUserMedia({ 
+				video: { facingMode: "environment" } // ใช้ "ideal" แทน
+			})
+			.then(function(stream) {
+				elements.video.srcObject = stream;
+			})
+			.catch(function(error) {
+				console.error('Error accessing webcam:', error);
+			});
 		} else {
 			console.error('getUserMedia is not supported in this browser.');
 		}
