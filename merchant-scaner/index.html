@@ -166,7 +166,7 @@
 
 	function showProductDetail(barcode) {
 		document.getElementById('productCode').value = barcode;
-		$('#productModal').fadeIn();
+		$('#productModal').css('display', 'flex').hide().fadeIn();
 	}
 
 	function closeModal() {
