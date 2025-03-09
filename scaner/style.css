@@ -1,28 +1,6 @@
-/* #barcodevideo, #barcodecanvas, #barcodecanvasg {
-	height: 400px;
-}	
-
-#barcodecanvasg {
-	position: absolute;
-	top: 0px;
-	left: 0px;
-}
-
-#result {
-	font-family: verdana;
-	font-size: 1.5em;
-}
-
-#barcode {
-	position: relative;
-}	
-
-#barcodecanvas {
-	display: none;
-} */
 body {
 	font-family: 'Kanit', sans-serif;
-	background-color: #f0f0f5;
+	background-color: #f4f4f9;
 	margin: 0;
 	padding: 0;
 	display: flex;
@@ -31,42 +9,188 @@ body {
 	height: 100vh;
 }
 
-#barcode-container {
+.container {
 	background: #fff;
 	border-radius: 15px;
-	box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 	padding: 20px;
 	text-align: center;
 	width: 90%;
-	max-width: 480px;
+	max-width: 500px;
+	position: relative;
+}
+
+.header {
+	background: #007bff;
+	color: #fff;
+	font-size: 18px;
+	padding: 15px;
+	text-align: center;
+	border-radius: 12px 12px 0 0;
+	position: relative;
+}
+
+.back-btn {
+	position: absolute;
+	left: 15px;
+	top: 50%;
+	transform: translateY(-50%);
+	background: #fff;
+	color: #007bff;
+	border: none;
+	padding: 5px 10px;
+	font-size: 14px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+
+.back-btn:hover {
+	background: #f0f0f0;
+}
+
+h1 {
+	margin: 10px 0;
+	font-size: 22px;
+	color: #333;
 }
 
 #barcode {
 	position: relative;
-	overflow: hidden;
-	border-radius: 10px;
 	background: #000;
+	border-radius: 10px;
+	overflow: hidden;
 }
 
-video, canvas {
+video {
 	width: 100%;
 	display: block;
 }
 
+#scan-line {
+	position: absolute;
+	top: 50%;
+	left: 15px;
+	right: 15px;
+	height: 2px;
+	background: red;
+	animation: scan 2s infinite linear;
+}
+
+/* @keyframes scan {
+	0% { top: 15%; }
+	50% { top: 85%; }
+	100% { top: 15%; }
+} */
+
 #result {
 	margin-top: 15px;
-	font-size: 24px;
+	font-size: 20px;
 	font-weight: bold;
-	color: #4CAF50;
+	color: #28a745;
 	min-height: 30px;
 }
 
-h1 {
-	margin: 0 0 15px;
-	font-size: 24px;
+/* ซ่อน canvas ประมวลผล */
+#barcodecanvas,
+#barcodecanvasg {
+	display: none;
+}
+
+.modal {
+	display: none;
+	/* เริ่มซ่อน */
+	position: fixed;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Kanit', sans-serif;
+	overflow: hidden;
+}
+
+.modal-content {
+	background-color: #fff;
+	padding: 20px;
+	border-radius: 12px;
+	width: 90%;
+	max-width: 400px;
+	text-align: center;
+	position: relative;
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal img {
+	width: 100%;
+	max-height: 200px;
+	object-fit: cover;
+	margin-bottom: 15px;
+	border-radius: 8px;
+}
+
+.modal h3 {
+	margin: 0;
+	font-size: 20px;
 	color: #333;
 }
 
-#barcodecanvasg {
-	display: none; /* Hide processing canvas */
+.modal p {
+	font-size: 16px;
+	color: #555;
+	margin: 10px 0;
+}
+
+.qty {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 15px;
+	margin: 15px 0;
+}
+
+.qty button {
+	padding: 5px 15px;
+	font-size: 18px;
+	cursor: pointer;
+	border: none;
+	background: #007bff;
+	color: white;
+	border-radius: 6px;
+}
+
+.qty button:hover {
+	background: #0056b3;
+}
+
+.qty input {
+	width: 50px;
+	text-align: center;
+	font-size: 18px;
+}
+
+.modal-footer button {
+	background: #28a745;
+	color: white;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.modal-footer button:hover {
+	background: #218838;
+}
+
+.close-btn {
+	position: absolute;
+	top: 10px;
+	right: 15px;
+	cursor: pointer;
+	font-size: 18px;
+	color: #333;
 }
